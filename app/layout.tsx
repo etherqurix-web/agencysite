@@ -12,13 +12,20 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#040A1A',
-  colorScheme: 'dark',
+  themeColor: '#F5F8FC',
+  colorScheme: 'light dark',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try { if (localStorage.getItem('aq-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (_) {}",
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

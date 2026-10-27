@@ -54,7 +54,7 @@ export default function HeroField() {
         }
         const dm = Math.hypot(p.x - mouse.x, p.y - mouse.y);
         if (dm < MOUSE_LINK) {
-          ctx.strokeStyle = `rgba(53,209,230,${(1 - dm / MOUSE_LINK) * 0.55})`;
+          ctx.strokeStyle = `rgba(139,124,246,${(1 - dm / MOUSE_LINK) * 0.42})`;
           ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
         }
         ctx.fillStyle = 'rgba(160,210,255,.85)';

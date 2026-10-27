@@ -77,6 +77,7 @@ export default function Home() {
   const [sent, setSent] = useState(false);
   const [cardIndex, setCardIndex] = useState(0);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [clock, setClock] = useState<{ time: string; date: string } | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -92,6 +93,23 @@ export default function Home() {
   }, []);
   const openModal = useCallback(() => { setNavOpen(false); setModalOpen(true); }, []);
   const closeModal = useCallback(() => { setModalOpen(false); setSent(false); }, []);
+
+  // Global theme: light is the default, and the visitor's choice persists across reloads.
+  useEffect(() => {
+    const saved = window.localStorage.getItem('aq-theme');
+    const initial: 'light' | 'dark' = saved === 'dark' ? 'dark' : 'light';
+    setTheme(initial);
+    document.documentElement.dataset.theme = initial;
+  }, []);
+
+  const toggleTheme = useCallback(() => {
+    setTheme((current) => {
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = next;
+      window.localStorage.setItem('aq-theme', next);
+      return next;
+    });
+  }, []);
 
   // Loader progress
   useEffect(() => {
@@ -211,6 +229,7 @@ export default function Home() {
         <div className="header-right">
           <div className="clock-chip"><span className="live-dot" /><span>PKT</span><strong>{time}</strong></div>
           <button className="pill primary header-cta" onClick={openModal}><span>Let&apos;s Talk</span></button>
+          <button className="theme-toggle" onClick={toggleTheme} aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'} title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}><span className="theme-toggle-icon" aria-hidden="true">{theme === 'light' ? '☾' : '☼'}</span><span className="theme-word">{theme === 'light' ? 'Dark' : 'Light'}</span></button>
           <button className="menu-btn" onClick={() => setNavOpen(true)} aria-label="Open menu"><span className="hamburger-lines"><i /><i /><i /></span><span className="menu-word">Menu</span></button>
         </div>
       </div>

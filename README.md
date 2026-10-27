@@ -19,3 +19,12 @@ npm run build && npm start
 - Contact email: CONTACT_EMAIL at the top of app/page.tsx
 - Put images in public/work-gallery/ (rebuild to update): the 3D gallery shows automatically, hidden when empty
 - Blog posts: lib/blog.ts
+
+
+## Global light / dark theme
+
+- The site defaults to **Light Cosmic** mode.
+- Use the **Dark / Light** control in the header to switch themes.
+- The selected theme is saved in `localStorage` under `aq-theme` and is restored on subsequent visits, including blog detail pages.
+- The dark theme reuses the original midnight-navy styling; light-only Liquid Glass refinements are scoped to `html[data-theme="light"]`.
+- The Selected Projects AQ watermark remains centered in both themes.
