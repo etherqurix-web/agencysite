@@ -326,8 +326,10 @@ export default function Home() {
             {works.map((w, i) => (
               <li className="reveal" data-delay={i * 90} key={w.title}>
                 <article className="work-card">
-                  <img className="work-watermark" src={MARK} alt="" aria-hidden="true" />
-                  <div className="work-meta"><span>0{i + 1} / 0{works.length}</span><span>{w.meta}</span></div>
+                  <div className="work-visual">
+                    <div className="work-meta"><span>0{i + 1} / 0{works.length}</span><span>{w.meta}</span></div>
+                    <img className="work-watermark" src={MARK} alt="" aria-hidden="true" />
+                  </div>
                   <div className="work-bottom">
                     <h3>{w.title}</h3>
                     <p>{w.text}</p>

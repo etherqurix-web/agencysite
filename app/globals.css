@@ -955,26 +955,48 @@ html[data-theme="light"] .theme-toggle:hover { border-color: rgba(167,139,250,.7
 }
 
 
-/* Project AQ watermark placement is shared by both themes. */
-/* Keep the AQ mark centered in the open upper-middle of each project card,
-   clear of the title/description block so it reads as a deliberate watermark. */
+/* Give project cards the same dedicated visual header as the journal cards. */
 .work-card { position: relative; }
+.work-visual {
+  position: relative;
+  flex: 0 0 10rem;
+  margin: -1.5rem -1.5rem 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 24%, rgba(167,139,250,.28), transparent 46%),
+    linear-gradient(145deg, rgba(220,235,255,.72), rgba(168,200,247,.38) 52%, rgba(117,141,235,.24));
+}
+.work-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.22) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+  pointer-events: none;
+}
+.work-meta {
+  position: absolute;
+  inset: 1.5rem 1.5rem auto;
+  z-index: 2;
+}
 .work-watermark {
   left: 50%;
   right: auto;
-  top: 35%;
-  width: clamp(6.8rem, 34%, 9rem);
-  max-width: 38%;
-  opacity: .13;
+  top: 56%;
+  width: 6.5rem;
+  max-width: 40%;
+  opacity: .72;
   transform: translate(-50%, -50%);
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
   object-fit: contain;
 }
-.work-card:hover .work-watermark { opacity: .19; transform: translate(-50%, -50%) scale(1.035); }
-.work-meta, .work-bottom { z-index: 1; }
+.work-card:hover .work-watermark { opacity: .86; transform: translate(-50%, -50%) scale(1.045); }
+.work-bottom { position: relative; z-index: 1; }
 .work-bottom { margin-top: auto; }
 
 @media (max-width: 520px) {
-  .work-watermark { top: 34%; width: 7rem; max-width: 34%; }
+  .work-visual { flex-basis: 9rem; }
 }
